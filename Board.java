@@ -7,11 +7,7 @@ public class Board extends JFrame implements MouseListener {
     public static final int TILE_SIDE_COUNT = 6;
 
 
-   
-
-
-
-    public Board(){
+    public Board() {
 
 
         // JFrame applicationFrame = new JFrame();
@@ -19,7 +15,7 @@ public class Board extends JFrame implements MouseListener {
         // applicationFrame.setVisible(true);
         //applicationFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        this.setSize(800,800);
+        this.setSize(800, 800);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.addMouseListener(this);
@@ -28,18 +24,20 @@ public class Board extends JFrame implements MouseListener {
 
     /**
      * Метод който взима кординатите върху който  щракне мишката
+     *
      * @param e
      */
 
 
-
     public void mouseClicked(MouseEvent e) {
 
-        int row = this.getBoardDimentionBasedOnCoordinates(e.getY());
-        int col = this.getBoardDimentionBasedOnCoordinates(e.getX());
+        System.out.println("Col  -> " + this.getBoardDimentionBasedOnCoordinates(e.getX()));
+
+        System.out.println("Row  -> " + this.getBoardDimentionBasedOnCoordinates(e.getY()));
 
 
     }
+
     @Override
     public void mousePressed(MouseEvent e) {
 
@@ -59,6 +57,7 @@ public class Board extends JFrame implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
     @Override
 
     /**
@@ -68,12 +67,12 @@ public class Board extends JFrame implements MouseListener {
 
         // super.paint(g);
 
-        for(int row = 0 ;  row  < 8; row++){
+        for (int row = 0; row < 8; row++) {
 
-            for(int col = 0; col < 8;col++){
+            for (int col = 0; col < 8; col++) {
 
-                Color tileColor = this.getTileColor(row,col);
-                GameTile  tile = new GameTile(row,col, tileColor);
+                Color tileColor = this.getTileColor(row, col);
+                GameTile tile = new GameTile(row, col, tileColor);
                 tile.render(g);
 
              /* Pawns p1 = new Pawns(row,col);
@@ -81,7 +80,6 @@ public class Board extends JFrame implements MouseListener {
                 Liders lidYellow= new Liders(row,col);
                 lidYellow.render(g);
 */
-
 
 
                 // Knight k1 = new Knight(row,col);
@@ -95,35 +93,33 @@ public class Board extends JFrame implements MouseListener {
 
     /**
      * Метод принтиращ игралното поле по подадени кординати за ред и колона
+     *
      * @param row
      * @param col
      * @return
      */
 
-    private Color getTileColor(int row,int col){
+    private Color getTileColor(int row, int col) {
         boolean isRowEven = (row % 2 == 0);
-        boolean isRowOdd  = !isRowEven;
+        boolean isRowOdd = !isRowEven;
         boolean isColEven = (col % 2 == 0);
-        boolean isCOlOdd  = !isColEven;
+        boolean isCOlOdd = !isColEven;
 
-        if(isRowEven && isColEven) return Color.RED;
-        if(isRowEven && isCOlOdd) return  Color.WHITE;
-        if(isRowOdd && isColEven) return  Color.WHITE;
+        if (isRowEven && isColEven) return Color.RED;
+        if (isRowEven && isCOlOdd) return Color.WHITE;
+        if (isRowOdd && isColEven) return Color.yellow;
 
-        return  Color.blue;
+        return Color.blue;
 
     }
 
 
     /**
      * Метод взимащ кординатите от игралното поле
-      */
+     */
 
     private int getBoardDimentionBasedOnCoordinates(int coordinates) {
         return coordinates / GameTile.TILE_SIZE;
     }
-    // private  int getBoardDimentionBasedOnCordinates(int coordinates){
 
-
-    //}
 }
